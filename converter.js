@@ -1,4 +1,4 @@
-// O(n)
+// O(n^2)
 const arrayToTree = data => {
   const tree = [];
   const childrenOf = new Map();
