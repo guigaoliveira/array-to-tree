@@ -1,4 +1,4 @@
-// O(n)
+// O(n²)
 const filter = (data, id) => {
   const obj = new Set();
   const result = [
