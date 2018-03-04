@@ -3,23 +3,30 @@
 // recursive solution (possible when TCO is implemented)
 
 /* 
-const searchParents = ({ parentId }, array, aux = [], n = array.length) => {
-  const arrItem = array.find(({ id }) => def && id && id === parentId);
-  return n === 0
+const searchParents = ({ parentId }, array, aux = [], count = array.length) => {
+  const itemWithParentId = array.find(
+    ({ id }) => parentId && id && id === parentId
+  );
+  return count === 0
     ? aux
-    : searchParents(arrItem, array, arrItem ? [...aux, arrItem] : aux, n - 1);
+    : searchParents(
+        itemWithParentId,
+        array,
+        itemWithParentId ? [...aux, itemWithParentId] : aux,
+        count - 1
+      );
 };
 const searchParentsOfNode = (arr, parentId) => searchParents({ parentId }, arr);
 */
 
-const findValueByParentId = (array, parentId) =>
+const findItemByParentId = (array, parentId) =>
   array.find(({ id }) => id && id === parentId);
 
 const searchParentsOfNode = (array, parentId) =>
   array.reduce(
-    curr => {
-      const arrItem = findValueByParentId(array, curr[0].parentId);
-      return arrItem ? [arrItem, ...curr] : [...curr];
+    item => {
+      const itemWithParentId = findItemByParentId(array, item[0].parentId);
+      return itemWithParentId ? [itemWithParentId, ...item] : [...item];
     },
-    [findValueByParentId(array, parentId)]
+    [findItemByParentId(array, parentId)]
   );
